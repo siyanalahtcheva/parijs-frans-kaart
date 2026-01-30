@@ -1,0 +1,206 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #020617; /* donkerblauw/zwart */
+  color: #e5e7eb;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 16px;
+}
+
+/* Layout */
+.app {
+  max-width: 1100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: #020617;
+  border-radius: 16px;
+  border: 1px solid #1f2937;
+  padding: 16px;
+}
+
+/* Map */
+.map-wrapper {
+  margin-top: 8px;
+  height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1f2937;
+  background: #020617;
+}
+
+.map-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Paris_arrondissements_map.svg/1200px-Paris_arrondissements_map.svg.png");
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.1);
+}
+
+.map-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+/* Markers op de kaart */
+.map-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.marker-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+.marker-label {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid #4b5563;
+  font-size: 0.7rem;
+}
+
+.marker-label-correct {
+  color: #4ade80;
+}
+
+.marker-label-wrong {
+  color: #fb7185;
+}
+
+/* Teksten en vragen */
+
+h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.question-title {
+  font-size: 1.1rem;
+  margin: 0 0 4px;
+}
+
+.question-text {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-button {
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: #020617;
+  color: inherit;
+  cursor: pointer;
+}
+
+.option-button:hover {
+  border-color: #38bdf8;
+}
+
+/* Extra states */
+.option-correct {
+  border-color: #22c55e;
+  background: #022c22;
+}
+
+.option-wrong {
+  border-color: #fb7185;
+  background: #2c0b0f;
+}
+
+/* Feedback and explanation */
+.feedback {
+  margin-top: 16px;
+}
+
+.feedback-good {
+  color: #22c55e;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.feedback-bad {
+  color: #fb7185;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.explanation {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+/* Placeholder and list */
+.question-placeholder {
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.small-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+.small-list li {
+  margin-bottom: 8px;
+}

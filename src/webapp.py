@@ -3,12 +3,6 @@ from pathlib import Path
 
 import streamlit as st
 import streamlit.components.v1 as components
-
-
-# -----------------------------
-# Data
-# -----------------------------
-# x/y zijn percentages (0-100) binnen de kaart (links->rechts / boven->onder)
 LOCATIONS = [
     {
         "id": "eiffel",
@@ -104,11 +98,6 @@ LOCATIONS = [
         "explanation": "'Billet' is mannelijk: 'un billet'. 'Combien coûte ... ?' is correct.",
     },
 ]
-
-
-# -----------------------------
-# App setup
-# -----------------------------
 st.set_page_config(page_title="Oefen Frans in Parijs", layout="wide")
 
 if "active_id" not in st.session_state:
@@ -118,10 +107,6 @@ if "answers" not in st.session_state:
     # answers[loc_id] = {"selectedIndex": int, "isCorrect": bool}
     st.session_state.answers = {}
 
-
-# -----------------------------
-# Helpers
-# -----------------------------
 def get_active_location():
     if not st.session_state.active_id:
         return None
@@ -138,18 +123,10 @@ def load_map_as_data_uri(image_path: Path) -> str:
     b64 = base64.b64encode(raw).decode("utf-8")
     return f"data:image/webp;base64,{b64}"
 
-
-# -----------------------------
-# Sync from query param (hotspots)
-# -----------------------------
 loc_param = st.query_params.get("loc")
 if loc_param:
     st.session_state.active_id = str(loc_param)
 
-
-# -----------------------------
-# UI
-# -----------------------------
 st.title("🇫🇷 Oefen Frans in Parijs")
 st.caption("Klik op een plek op de kaart (hotspots) of kies een locatie in de sidebar.")
 
@@ -176,9 +153,6 @@ with st.sidebar:
 
 left, right = st.columns([1.25, 1])
 
-# -----------------------------
-# Map + hotspots (hover + active marker)
-# -----------------------------
 with left:
     img_path = Path(__file__).parent / "Paris.webp"
     data_uri = load_map_as_data_uri(img_path)
@@ -286,15 +260,12 @@ with left:
         </style>
         """
 
-        # 🔥 FIX: geen <a href="?loc=..."> meer die tab-gedrag kan triggeren in iframe.
-        # We gebruiken onclick + window.parent.location.replace(...) -> altijd zelfde tab.
         hotspots_html = ""
         for loc in LOCATIONS:
             cls = "hotspot"
             if loc["id"] == active_id:
                 cls += " active"
 
-            # replace() voorkomt extra history entries (optioneel)
             hotspots_html += f"""
               <a class="{cls}" href="#"
                  onclick="window.parent.location.replace('?loc={loc['id']}'); return false;"

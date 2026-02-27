@@ -292,10 +292,6 @@ with left:
         unsafe_allow_html=True,
     )
 
-
-# -----------------------------
-# Question panel
-# -----------------------------
 with right:
     active = get_active_location()
 
